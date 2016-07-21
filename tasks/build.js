@@ -7,6 +7,7 @@ const uglify      = require('gulp-uglify');
 const buffer      = require('vinyl-buffer');
 const source      = require('vinyl-source-stream');
 const rename      = require('gulp-rename');
+const livereload  = require('gulp-livereload');
 
 module.exports = () => {
 
@@ -20,7 +21,8 @@ module.exports = () => {
     .pipe( buffer() )
     .pipe( srcmaps.init({ loadMaps: true }) )
     .pipe( srcmaps.write( './' ) )
-    .pipe( gulp.dest('./dist') );
+    .pipe( gulp.dest('./dist') )
+    .pipe( livereload({ start: true }) );;
   });
 
   gulp.task( 'build-min', [ 'build-full' ], () => {

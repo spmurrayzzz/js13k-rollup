@@ -1,6 +1,9 @@
 'use strict';
 
-const gulp = require('gulp');
+const gulp        = require('gulp');
+const livereload  = require('gulp-livereload');
+
+livereload.listen();
 
 // Bootstrap individual task files
 [ 'build', 'css', 'template', 'watch', 'zip' ]

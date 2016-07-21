@@ -7,7 +7,7 @@ and clean. Using `gulp` and `rollup`, this repo offers the following features:
 
 - Support for [ES2015 modules](http://exploringjs.com/es6/ch_modules.html)
 - JavaScript minification via Uglify
-- Sourcemaps support for development
+- Sourcemaps and livereload support for development
 - Inlining for all CSS and JavaScript assets (single `index.min.html` output)
 - Zip packaging of the inlined output for final competition submission
 
