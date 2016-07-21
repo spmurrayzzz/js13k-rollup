@@ -1,0 +1,23 @@
+{
+  "name": "js13k-rollup",
+  "version": "0.0.0",
+  "description": "Boilerplate setup for the js13kgames.com competition powered by gulp and rollup",
+  "scripts": {
+    "test": "gulp"
+  },
+  "author": "Stephen Murray <spmurrayzzz>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-buffer": "0.0.2",
+    "gulp-concat-css": "2.3.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-uglify": "1.5.4",
+    "gulp-zip": "3.2.0",
+    "handlebars": "4.0.5",
+    "rollup-stream": "1.11.0",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0"
+  }
+}
