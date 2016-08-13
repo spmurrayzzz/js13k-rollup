@@ -14,6 +14,9 @@ module.exports = () => {
 
   gulp.task( 'report', [ 'zip' ], done => {
     fs.stat( './dist/game.zip', ( err, data ) => {
+      if ( err ) {
+        return done( err );
+      }
       util.log(
         util.colors.yellow.bold(`Current game size: ${ data.size } bytes`)
       );

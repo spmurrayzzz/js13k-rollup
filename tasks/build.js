@@ -22,7 +22,7 @@ module.exports = () => {
     .pipe( srcmaps.init({ loadMaps: true }) )
     .pipe( srcmaps.write( './' ) )
     .pipe( gulp.dest('./dist') )
-    .pipe( livereload({ start: true }) );;
+    .pipe( livereload({}) );;
   });
 
   gulp.task( 'build-min', [ 'build-full' ], () => {
