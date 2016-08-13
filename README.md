@@ -1,5 +1,7 @@
 # js13k-rollup
 
+![image](http://i.imgur.com/ekXSFYh.png)
+
 *Requires: Node.js 4+*
 
 The purpose of this project is to make getting started with the [js13kgames.com](http://js13kgames.com) competition both easy
