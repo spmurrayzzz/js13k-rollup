@@ -9,4 +9,4 @@ livereload.listen();
 [ 'build', 'css', 'template', 'watch', 'zip' ]
   .forEach( task => require(`./tasks/${ task }`)() );
 
-gulp.task( 'default', [ 'build', 'css', 'template', 'zip' ] );
+gulp.task( 'default', [ 'build', 'css', 'template', 'zip', 'report' ] );
