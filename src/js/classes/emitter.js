@@ -13,7 +13,10 @@ Emitter.prototype.on = function( ev, fn ) {
   return this;
 };
 
-Emitter.prototype.off = function( ev ) {
+Emitter.prototype.off = function( ev, fn ) {
+  var events;
+  var target;
+
   if ( arguments.length === 0 ) {
     cache[ this._emitterId ] = {};
     return this;
@@ -21,6 +24,13 @@ Emitter.prototype.off = function( ev ) {
 
   if ( arguments.length === 1 ) {
     cache[ this._emitterId ][ ev ] = [];
+    return this;
+  }
+
+  if ( typeof fn === 'function' ) {
+    events = cache[ this._emitterId ][ ev ]
+    target = events.indexOf( fn );
+    events.splice( target, 1 );
     return this;
   }
 };
@@ -42,6 +52,15 @@ Emitter.prototype.emit = function( ev ) {
   });
 
   return this;
-}
+};
+
+Emitter.prototype.once = function( ev, fn ) {
+  var self = this;
+  var wrapped = function() {
+    fn.apply( null, arguments );
+    self.off( ev, wrapped );
+  }
+  return this.on( ev, wrapped );
+};
 
 export default Emitter;
