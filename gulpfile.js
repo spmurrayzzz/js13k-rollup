@@ -1,9 +1,19 @@
 'use strict';
 
-const gulp        = require('gulp');
+const taskPath = './tasks';
+const gulp          = require('gulp');
+const buildTasks    = require(`${ taskPath }/build.js`);
+const cssTasks      = require(`${ taskPath }/css.js`);
+const templateTasks = require(`${ taskPath }/template.js`);
+const watchTasks    = require(`${ taskPath }/watch.js`);
+const zipTasks      = require(`${ taskPath }/zip.js`);
 
-// Bootstrap individual task files
-[ 'build', 'css', 'template', 'watch', 'zip' ]
-  .forEach( task => require(`./tasks/${ task }`)() );
+const allTasks = [
+  buildTasks.build,
+  cssTasks.css,
+  templateTasks.template,
+  zipTasks.zip,
+  zipTasks.report
+];
 
-gulp.task( 'default', [ 'build', 'css', 'template', 'zip', 'report' ] );
+exports.default = gulp.series(...allTasks);
