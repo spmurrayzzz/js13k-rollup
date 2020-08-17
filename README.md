@@ -49,7 +49,7 @@ gulp watch
 JavaScript step
 
 1. Rollup reads the dependency tree and outputs `dist/main.js` w/ sourcemaps support
-2. Uglify minifies the previous file and outputs `dist/main.min.js`
+2. Terser minifies the previous file and outputs `dist/main.min.js`
 
 CSS step
 
