@@ -13,7 +13,7 @@ and clean. Using `gulp` and `rollup`, this repo offers the following features:
 - Inlining for all CSS and JavaScript assets (single `index.min.html` output)
 - Zip packaging of the inlined output for final competition submission
 
-Current output zip size: `639 bytes`
+Current output zip size: `628 bytes`
 
 ## Getting started
 
