@@ -13,7 +13,7 @@ and clean. Using `gulp` and `rollup`, this repo offers the following features:
 - Inlining for all CSS and JavaScript assets (single `index.min.html` output)
 - Zip packaging of the inlined output for final competition submission
 
-Current output zip size: `639 bytes`
+Current output zip size: `628 bytes`
 
 ## Getting started
 
@@ -49,7 +49,7 @@ gulp watch
 JavaScript step
 
 1. Rollup reads the dependency tree and outputs `dist/main.js` w/ sourcemaps support
-2. Uglify minifies the previous file and outputs `dist/main.min.js`
+2. Terser minifies the previous file and outputs `dist/main.min.js`
 
 CSS step
 
