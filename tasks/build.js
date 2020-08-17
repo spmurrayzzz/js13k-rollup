@@ -3,7 +3,7 @@
 const gulp        = require('gulp');
 const rollup      = require('rollup-stream');
 const srcmaps     = require('gulp-sourcemaps');
-const uglify      = require('gulp-uglify');
+const terser      = require('gulp-terser');
 const buffer      = require('vinyl-buffer');
 const source      = require('vinyl-source-stream');
 const rename      = require('gulp-rename');
@@ -16,13 +16,9 @@ function onError( err, pipeline ) {
   pipeline.emit('end');
 }
 
-module.exports = () => {
-
-  gulp.task( 'build', [ 'build-min' ] );
-
-  gulp.task( 'build-full', () => {
-    let pipeline;
-    return pipeline = rollup({
+function buildFull() {
+  let pipeline;
+  return pipeline = rollup({
       entry: 'src/js/main.js', format: 'iife', sourceMap: true
     })
     .on( 'error', err => onError( err, pipeline ) )
@@ -32,14 +28,15 @@ module.exports = () => {
     .pipe( srcmaps.write( './' ) )
     .pipe( gulp.dest('./dist') )
     .pipe( livereload({}) );
-  });
+}
 
-  gulp.task( 'build-min', [ 'build-full' ], () => {
-    let pipeline;
-    return pipeline = gulp.src('./dist/main.js')
-      .pipe( uglify() )
-      .on( 'error', err => onError( err, pipeline ) )
-      .pipe( rename('main.min.js') )
-      .pipe( gulp.dest('./dist') );
-  });
-};
+function buildMin() {
+  let pipeline;
+  return pipeline = gulp.src('./dist/main.js')
+    .pipe( terser() )
+    .on( 'error', err => onError( err, pipeline ) )
+    .pipe( rename('main.min.js') )
+    .pipe( gulp.dest('./dist') );
+}
+
+exports.build = gulp.series(buildFull, buildMin)

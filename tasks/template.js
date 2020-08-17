@@ -6,6 +6,8 @@ const fs          = require('fs');
 const srcmaps     = require('gulp-sourcemaps');
 const buffer      = require('vinyl-buffer');
 const source      = require('vinyl-source-stream');
+const buildTasks  = require('./build.js');
+const cssTasks    = require('./css.js');
 
 function getJS() {
   return readFile('./dist/main.min.js');
@@ -37,29 +39,28 @@ function readFile( fname ) {
   });
 }
 
-module.exports = () => {
-  gulp.task( 'template', [ 'build', 'css' ], done => {
-    let ctx = {};
+function template(done) {
+  let ctx = {};
 
-    getJS()
-    .then( js => ctx.js = js )
-    .then( () => getCSS() )
-    .then( css => ctx.css = css )
-    .then( () => readFile( './src/index.hbs') )
-    .then( str => {
-      // Inline/minified index file
-      let inlineResult = handlebars.compile( str )
-        ({ js: ctx.js, css: ctx.css });
+  return getJS()
+  .then( js => ctx.js = js )
+  .then( () => getCSS() )
+  .then( css => ctx.css = css )
+  .then( () => readFile( './src/index.hbs') )
+  .then( str => {
+    // Inline/minified index file
+    let inlineResult = handlebars.compile( str )
+      ({ js: ctx.js, css: ctx.css });
 
-      writeFile( './dist/index.min.html', inlineResult )
-      .then( () => {
-        // development index file
-        let result = handlebars.compile( str )();
-        return writeFile( './dist/index.html', result )
-      })
-      .then( done );
-      
-    });
-
-  });
+    writeFile( './dist/index.min.html', inlineResult )
+    .then( () => {
+      // development index file
+      let result = handlebars.compile( str )();
+      return writeFile( './dist/index.html', result )
+    })
+    .then( done );
+  })
+  done();
 };
+
+exports.template = template;
