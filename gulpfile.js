@@ -1,9 +1,7 @@
 'use strict';
 
-const gulp        = require('gulp');
+const distTasks = require('./tasks/dist.js');
+const watchTasks = require('./tasks/watch.js');
 
-// Bootstrap individual task files
-[ 'build', 'css', 'template', 'watch', 'zip' ]
-  .forEach( task => require(`./tasks/${ task }`)() );
-
-gulp.task( 'default', [ 'build', 'css', 'template', 'zip', 'report' ] );
+exports.default = distTasks.dist;
+exports.watch = watchTasks.watch;
